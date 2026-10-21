@@ -1,0 +1,78 @@
+name: Scrape.ly
+description: Run a Scrape.ly Actor or saved task, wait for it to finish, and use its results in your workflow.
+author: TeraShift GmbH (Scrape.ly)
+branding:
+  icon: download-cloud
+  color: green
+
+inputs:
+  api-token:
+    description: Your Scrape.ly API key. Store it as a repository secret.
+    required: true
+  actor:
+    description: Actor ID or username/actor-name. Set this or task.
+    required: false
+  task:
+    description: Saved task ID. Set this or actor.
+    required: false
+  input:
+    description: Run input as JSON. For a task, fields you set override the matching fields of its saved input.
+    required: false
+    default: '{}'
+  input-file:
+    description: Path to a JSON file with the run input, instead of input.
+    required: false
+  wait:
+    description: Wait for the run to finish.
+    required: false
+    default: 'true'
+  max-wait:
+    description: Seconds to wait for the run before the step fails.
+    required: false
+    default: '3600'
+  build:
+    description: Build tag or number to run, for example latest. Empty uses the default build.
+    required: false
+  memory:
+    description: Memory for the run in MB. Empty uses the default.
+    required: false
+  timeout:
+    description: Stop the run after this many seconds. Empty uses the default.
+    required: false
+  output-file:
+    description: Save the run's results to this file.
+    required: false
+  output-format:
+    description: Format of output-file, json, jsonl or csv.
+    required: false
+    default: json
+  max-items:
+    description: Max number of results to fetch for output-file and the items output.
+    required: false
+    default: '1000'
+  fail-on-error:
+    description: Fail the step when the run does not succeed.
+    required: false
+    default: 'true'
+  base-url:
+    description: Scrape.ly API address.
+    required: false
+    default: https://api.scrape.ly
+
+outputs:
+  run-id:
+    description: ID of the run.
+  status:
+    description: Final status of the run, for example SUCCEEDED or FAILED (READY or RUNNING when not waiting).
+  dataset-id:
+    description: ID of the run's default dataset.
+  key-value-store-id:
+    description: ID of the run's default key-value store.
+  items-count:
+    description: Number of results fetched.
+  items:
+    description: The results as a JSON array, when smaller than 1 MB.
+
+runs:
+  using: node24
+  main: index.js

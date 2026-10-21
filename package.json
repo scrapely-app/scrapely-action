@@ -1,0 +1,20 @@
+{
+  "name": "scrapely-action",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GitHub Action: run a Scrape.ly Actor or saved task and use its results in your workflow.",
+  "license": "MIT",
+  "author": "TeraShift GmbH (Scrape.ly)",
+  "homepage": "https://scrape.ly/docs/integrations#run-actors-from-github-actions",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scrapely-app/scrapely-action.git"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node --check index.js"
+  }
+}
